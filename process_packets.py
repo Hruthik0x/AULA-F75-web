@@ -60,7 +60,7 @@ class Multimedia:
             objs[a] = objs[a][4:]
 
         base_name = path.splitext(path.basename(file_path))[0]
-        dump_path = path.join(DUMP_DATA_PATH, base_name)
+        dump_path = path.join(DUMP_DATA_PATH, base_name + ".txt")
         Utils.dump_data(objs, dump_path)
 
         
@@ -86,7 +86,7 @@ def process_pcapng(file_path):
 
     # Get just filename without extension
     base_name = path.splitext(path.basename(file_path))[0]
-    dump_path = path.join(DUMP_DATA_PATH, base_name)
+    dump_path = path.join(DUMP_DATA_PATH, base_name + ".txt")
     Utils.dump_data(objs, dump_path)
 
 if __name__ == "__main__":
