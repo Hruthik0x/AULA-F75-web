@@ -1,5 +1,5 @@
 import pyshark
-from os import path, mkdir
+from os import path
 from enum import Enum
 
 DUMP_DATA_PATH = 'json_data'
@@ -15,7 +15,7 @@ class Utils:
         with open(file_path, "w") as f:
             f.write("[\n")
             for row_i, row in enumerate(data):
-                formatted_numbers = ", ".join(f"{num:3d}" for num in row)
+                formatted_numbers = ", ".join(f"{num:02x}" for num in row)
                 f.write(f"  [{formatted_numbers}]")
                 if row_i != len(data) - 1:
                     f.write(",\n")
@@ -34,7 +34,6 @@ class Multimedia:
         sent_packet_count = 0
         for packet in cap:
             data = None
-            arr = None
             direc = None 
             
             if packet.length == '56':
@@ -61,7 +60,7 @@ class Multimedia:
             objs[a] = objs[a][4:]
 
         base_name = path.splitext(path.basename(file_path))[0]
-        dump_path = path.join(DUMP_DATA_PATH, base_name + '.json')
+        dump_path = path.join(DUMP_DATA_PATH, base_name)
         Utils.dump_data(objs, dump_path)
 
         
@@ -87,7 +86,7 @@ def process_pcapng(file_path):
 
     # Get just filename without extension
     base_name = path.splitext(path.basename(file_path))[0]
-    dump_path = path.join(DUMP_DATA_PATH, base_name + '.json')
+    dump_path = path.join(DUMP_DATA_PATH, base_name)
     Utils.dump_data(objs, dump_path)
 
 if __name__ == "__main__":
