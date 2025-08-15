@@ -54,7 +54,7 @@ class Multimedia:
                     assert data[1] == 1
                     assert data[2] == 37
                     assert data[3] == sent_packet_count - 1
-                    # assert data[19] == Hash ???
+                    assert data[19] == sum(data[:19]) % 256
                     objs.append(data)
 
         for a in range(len(objs)) : 
@@ -91,4 +91,4 @@ def process_pcapng(file_path):
     Utils.dump_data(objs, dump_path)
 
 if __name__ == "__main__":
-    Multimedia.process_pcapng(file_path='pcapng/f12_vol_down.pcapng')
+    Multimedia.process_pcapng(file_path='pcapng/none.pcapng')

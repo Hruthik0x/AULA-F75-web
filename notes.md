@@ -28,21 +28,18 @@ Sent by the software when it detects the keyboard, stuff runs fine without imple
     
 ## Multimedia shortcuts 
 - After every packet sent, wait for acknowledgement (acknowledgement data is same as the data sent)
-- Total sent 32, received 37
-- Packet [0] = 1
-- Packet [1] = 37 (Is it Total no.of packets ??)
-- Packet [2] = i-1 (For ith packet sent)
+- Total sent 37, received 37
+- packet [0] = 19
+- packet [1] = 1
+- Packet [2] = 37 (Is it Total no.of packets ??)
+- Packet [3] = i-1 (For ith packet sent)
 - Packet [4] = 14 (Except for 37th packet, where it is 8)
-- Packet [18] = hash of the data ?? - Have to figure it out
+- Packet [19] = sum of all bytes (i.e from 0 - 18) % 256 
 - Other
     - '2' means the key is configured to something 
     - '0' means the key is not configured to anything
 - Multimedia 
+    - USB HID Consumer Control
     - 234 => Vol down
     - 233 => Vol inc
-
-- Total len 20, out of which 1 for id and 3 for other stuff, 4 gone => per packet 16 bytes, 1 key = 4 bytes
-- Per packet 4 keys ? 
-- 80 keys
- 4  * 37 = 
   
