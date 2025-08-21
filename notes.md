@@ -24,22 +24,28 @@ Sent by the software when it detects the keyboard, stuff runs fine without imple
         - Length : 47
         - Dst == 2.20.0
         - data present at data_layer.usb_data_fragment
+- Issues : 
+    - Keyboard does not report back the current configs
+    - Sets the entire stuff to default, cuz it does not know the existing configs 
+    - Sends packets for configuring every key, even if you want to configure only one key
 
     
 ## Multimedia shortcuts 
 - After every packet sent, wait for acknowledgement (acknowledgement data is same as the data sent)
 - Total sent 37, received 37
-- packet [0] = 19
-- packet [1] = 1
-- Packet [2] = 37 (Is it Total no.of packets ??)
+- packet [0] = 19   (ID)
+- packet [1] = 1    (Idk, is it like "1" for multimedia ?)
+- Packet [2] = 37 (Is it Total no.of packets ??, it worked fine with other numbers too, idk what this exactly is)
 - Packet [3] = i-1 (For ith packet sent)
-- Packet [4] = 14 (Except for 37th packet, where it is 8)
+- Packet [4] = 14 (except for last packet, i.e 37th one which has 8)
 - Packet [19] = sum of all bytes (i.e from 0 - 18) % 256 
 - Other
-    - '2' means the key is configured to something 
+    - '2' means the key is configured to something
+        - Like 02 00 00 usage_id (NA for lshift, rshift, lctrl, rctrl, lgui, lalt, ralt, fn)
     - '0' means the key is not configured to anything
 - Multimedia 
     - USB HID Consumer Control
     - 234 => Vol down
     - 233 => Vol inc
-  
+
+- **No need to send all the packets, just send the packets in which the key is configured (let the packet[3] be the same, as if you have sent all the packets) and do not forget to send the last packet (the one that has packet[4] = 8)**
